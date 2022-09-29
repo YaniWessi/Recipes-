@@ -36,5 +36,9 @@ server.post("/api/lessons", (req,res) => {
     res.status(201).json(lesson);
 })
 
+server.get('/api/hubs',(req, res) => {
+    res.status(200).json(hubs)
+})
+
 const PORT = 5000;
 server.listen(PORT, () => console.log(`\n ** API on http://localhost:${PORT} **\n`));
