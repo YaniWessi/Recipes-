@@ -1,5 +1,9 @@
 const express = require('express');
 
+const morgan = require('morgan');
+
+const helmet = require('helmet')
+
 
 const hubsRouter = require('./hubs/hubs.js')
 
@@ -8,8 +12,10 @@ const lessonsRouter = require('./lessons/lessons.js')
 const server = express();
 
 
-
-server.use(express.json())
+// global middleware 
+server.use(express.json()) // third party, needs to be npm installed ---- this line is teaching expresss how to parse json. 
+server.use(helmet()) // 3
+server.use(morgan("dev")) // built-in middleware: no need to npm install 
 
 server.use('/hubs', hubsRouter)
 server.use('/lessons',lessonsRouter)
