@@ -14,6 +14,7 @@ const server = express();
 
 // global middleware 
 server.use(express.json()) // third party, needs to be npm installed ---- this line is teaching expresss how to parse json. 
+server.use(logger)
 server.use(helmet()) // 3
 server.use(morgan("dev")) // built-in middleware: no need to npm install 
 
@@ -30,5 +31,14 @@ server.get("/", (req,res) => {
   <p>Welcome: ${nameInsert},to the Lambda Hubs API</p>
   `)
 })
+
+function logger(req, res, next) {
+  const method = req.method;
+  const endpoint = req.originalUrl;
+
+  console.log(`${method} to ${endpoint}`)
+
+  next();
+}
 
 module.exports = server;
